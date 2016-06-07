@@ -354,6 +354,7 @@ shutdown_instances() {
   show_instances instance_list
   cat instance_list
   echo "You are about to terminate the above the instances."
+  echo "WARNING:  This may include instances booted outside of Terraform.  Please double check the list if needed"
   read -r -p "Are you sure? [y/N] " response
   if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]
   then
