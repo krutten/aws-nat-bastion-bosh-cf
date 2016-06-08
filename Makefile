@@ -7,6 +7,9 @@ deploy: apply
 centos-ami-ids:
 	./bin/nbb centos-ami-ids
 
+install-dependencies:
+	./bin/nbb install-dependencies
+
 prepare:
 	./bin/nbb prepare
 
