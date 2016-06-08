@@ -28,6 +28,8 @@ These are a few providers various engineers working on the project happen to kno
 | [hover.com](http://www.hover.com) | Sorta? | Domain registrar; base product does include DNS management system that does support wildcard records |
 | [dnsmadeeasy.com](http://www.dnsmadeeasy.com/) | N | Untested; claims to support wildcard dns records |
 
+Honorable mention: [Lithium DNS](https://lidns.net) -- Unfortunately it doesn't seem they're able to support wildcard dns records _yet_, but that appears to be because they're quite new. When I tested this provider I found that I was able to specify some sorta weird settings, like an `A` record for a personal domain pointing at `127.0.0.1` _and it actually works_. Might be a good tool to use in certain situations (personal dev domains, possibly other applications, etc.)
+
 ### Your Domain Registrar
 
 You may not have to do much to get wildcard support for your DNS records. Turns out some more forward-thinking domain name registrars already support this feature within their own domain management control panel. I personally tested Hover today and did indeed find it working just fine. I'd be surprised if the mainstream guys out there didn't either already support this feature, or aren't at least _scrambling_ to do so at the earliest possibility.
