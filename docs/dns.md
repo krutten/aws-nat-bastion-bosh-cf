@@ -19,7 +19,7 @@ Would be a multi-level wildcard subdomain that might be used for service discove
 These are a few providers various engineers working on the project happen to know about. We don't guarantee any specific feature set or minimum supported configuration is available at any of the below; we just happen to remember dealing with them at one point or another and it seemed possible to use their service to orchestrate the DNS piece that you'll need here relatively easily.
 
 | Provider | Free Tier? | Comments |
-| :------  | ----:----- | :------  |
+| :------  | :-------: | :------  |
 | [namecheap.com](https://www.namecheap.com) | Y | _Yes, works in FreeDNS mode._ |
 | [cloudflare.com](https://www.cloudflare.com) | Y | _Works on free tier_ |
 | [dnsimple.com](https://dnsimple.com) | N | Untested; claims to support wildcard, YMMV |
