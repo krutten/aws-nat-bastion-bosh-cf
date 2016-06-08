@@ -45,6 +45,36 @@ provider() {
   esac
 }
 
+install_dependencies() {
+  check_install
+}
+
+check_install() {
+  local _version=0.6.15 _install=false _bin="terraform" _check=`terraform -v | awk '/Terraform v/{print $2}'`
+
+  log "Checking for ${_bin} ... "
+  if ! command -v ${_bin} &>/dev/null
+  then
+    install=true
+  else
+    if [[ "${_check}" != "v${_version}" ]]
+    then
+      _install=true
+    fi
+  fi
+
+  if [[ ${_install} == true ]]
+  then
+    log "Installing ${_bin} ${_version} ..."
+    curl -sOL "https://releases.hashicorp.com/${_bin}/${_version}/${_bin}_${_version}_darwin_amd64.zip"
+    unzip -d "/usr/local/bin" "${_bin}_${_version}_darwin_amd64.zip"
+    rm -f "${_bin}_${_version}_darwin_amd64.zip"
+    log "OK, ${_bin} ${_version} installed."
+  else
+    log "OK, ${_bin} is ${_version}"
+  fi
+}
+
 check_install_terraform()  {
   local _version=0.6.15 _install=false
 
@@ -375,23 +405,26 @@ main() {
   action="$1"
   shift || true
   case "${action}" in
-    (vpc)
-      provision_vpc "$@"
-      ;;
-    (prepare)
-      check_install_terraform
-      ;;
-    (provision)
-      provision "$@"
+    (centos-ami-ids)
+      find_centos_7_ami_ids "$@"
       ;;
     (bastion)
       bastion "$@"
       ;;
+    (install-dependencies)
+      install_dependencies
+      ;;
+    (prepare)
+      check_install_terraform
+      ;;
     (provider)
       provider "$@"
       ;;
-    (centos-ami-ids)
-      find_centos_7_ami_ids "$@"
+    (provision)
+      provision "$@"
+      ;;
+    (vpc)
+      provision_vpc "$@"
       ;;
     (*|help|-h)
       usage

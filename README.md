@@ -17,13 +17,17 @@ Set up a best practices Cloud Foundry with just a few commands.
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     </pre>
 
-### Prepare
+1. Our project can direct Homebrew to install dependencies (`direnv`,`jq`,`terraform`).
 
-The `make prepare` command will install Terraform to your `/usr/local/bin` folder.
+    <pre class="terminal">
+    make install-dependencies
+    </pre>
 
-```sh
-make prepare
-```
+1. Add Infrastructure CLI tools, for example AWS CLI tools is available via Homebrew.
+
+    <pre class="terminal">
+    homebrew install awscli
+    </pre>
 
 ### SSH Key
 
@@ -43,7 +47,6 @@ cp terraform/aws/terraform.tfvars.example terraform/aws/terraform.tfvars
 ```
 
 Follow the instructions in the example file about any changes that need to be made.
-
 
 ### Make It Go
 
@@ -71,16 +74,6 @@ To tear down the BOSH Director, Bastion server, NAT server and remove the Amazon
 make destroy
 ```
 
-### Clean Terraform Cache
-
-To reset the Terraform cached files and start over, you can also run:
-
-```sh
-make clean
-```
-
-Check out [terraform debugging](docs/terraform.md#debugging) for more about troubleshooting Terraform errors.
-
 ## Related Repositories
 
   * [bosh-init](https://github.com/cloudfoundry/bosh-init)
@@ -89,6 +82,6 @@ Check out [terraform debugging](docs/terraform.md#debugging) for more about trou
   * [terraform-aws-vpc](https://github.com/cloudfoundry-community/terraform-aws-vpc)
   * [terraform-aws-cf-net](https://github.com/cloudfoundry-community/terraform-aws-cf-net)
 
-## Apps to Validate Your Deployment / Pipeline(s)
+## Further Reading
 
-Check out [docs/apps.md](docs/apps.md) for some suggested applications you can use to validate your deployment and keeping your diagnostic scope narrow so that a real production app with dozens of moving parts doesn't overcomplicate the process of validation. (These are also useful for potentially debugging integration(s) between "real" apps and integrations with services, etc.)
+Checkout the [docs](/docs) folder for further reading.

@@ -33,12 +33,12 @@ cf login
 ...
 
 Email> admin
-Password> 
+Password>
 ```
 
 The default password for admin should be sufficient. The admin user doesn't follow an email address syntax.
 
-### API
+## API
 
 Say you want to access the API outside of the internal network:
 
