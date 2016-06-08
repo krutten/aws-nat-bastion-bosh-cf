@@ -1,43 +1,21 @@
-# aws-nat-bastion-bosh-cf
+# README
 
-With aws-nat-bastion-bosh-cf you can set up a best practices Cloud Foundry with just a few commands.
+Set up a best practices Cloud Foundry with just a few commands.
 
-Today you get Cloud Foundry on Amazon Web Services. Work is underway to simplify maintenance and support other IaaS and to include additional supporting services you are likely to need when you use Cloud Foundry.
+## Setup
 
-Setup the prerequisites, clone this repo, run the commands, and you'll have a fully functional Cloud Foundry to deploy applications on AWS.
+1. Change to your projects folder, and clone the repo.
 
-How does it work? [Terraform](https://www.terraform.io/) configures the networking infrastructure on AWS, next `bosh-init` sets up the BOSH Director, then BOSH installs Cloud Foundry.
+    <pre class="terminal">
+    git clone https://github.com/cloudfoundry-community/aws-nat-bastion-bosh-cf.git
+    cd aws-nat-bastion-bosh-cf
+    </pre>
 
-## Goals
+1. Install [Homebrew](http://brew.sh/).
 
-  * Re-sizable - Start small, but can grow as big as you need.  See `config/aws/cf-<size>.yml` for examples.
-  * Accessible - Give users the ability to try Cloud Foundry on AWS as quickly and easily as possible.
-  * Configurable - Manage the deploy manifests with [Spruce](https://github.com/geofffranks/spruce).
-  * Maintainable: Upgrade and adjust your Cloud Foundry deployment as your production needs change.
-
-## Prerequisites
-
-Examples assume you are running Mac OS X. Ensure the following are setup before continuing.
-
-  * [Amazon Web Services Setup](docs/aws-setup.md)
-  * Mac OS X with [Homebrew](http://brew.sh/)
-
-Homebrew will be used to install other third party software such as terraform or make
-
-## Quick start
-
-**Make sure you have set up the prerequisites listed above.**
-
-For more detailed instructions, see [Detailed Setup](docs/detailed-setup.md). If you run into trouble, check [troubleshooting.md](docs/troubleshooting.md) for suggestions.
-
-### Clone Repo
-
-In your local code folder clone the repo, then change to that folder.
-
-```sh
-git clone https://github.com/cloudfoundry-community/aws-nat-bastion-bosh-cf.git
-cd aws-nat-bastion-bosh-cf
-```
+    <pre class="terminal">
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    </pre>
 
 ### Prepare
 
