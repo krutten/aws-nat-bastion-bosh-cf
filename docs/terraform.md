@@ -2,7 +2,7 @@
 
 ## Clean Terraform Cache
 
-To reset the Terraform cached files and start over, you can also run:
+To reset the Terraform cached files and start over:
 
 ```sh
 make clean

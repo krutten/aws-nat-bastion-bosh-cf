@@ -6,7 +6,7 @@ Run `aws configure` to setup your AWS credentials for your current region.
 make provider-centos-ami-ids
 ```
 
-When you run `make provider-centos-ami-ids` replaces the block in the `terraform/aws/variables.tf` file.
+When you run `make provider-centos-ami-ids` replaces the block in `terraform/aws/variables.tf`.
 
 ```
 variable "aws_centos_ami" {

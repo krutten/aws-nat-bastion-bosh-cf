@@ -1,6 +1,6 @@
 # Service Discovery
 
-If you find yourself asking, "hey, where's the CF API end point?", or "uhh, blobstore, blobstore...where's that again?", this document is for you.
+If you find yourself asking, "Hey, where's the CF API end point?", or "uhh, blobstore, blobstore...where's that again?", this document is for you.
 
 ## Generally: THING.IP-ADDR.sslip.io
 

@@ -74,14 +74,10 @@ To tear down the BOSH Director, Bastion server, NAT server and remove the Amazon
 make destroy
 ```
 
-## Related Repositories
-
-  * [bosh-init](https://github.com/cloudfoundry/bosh-init)
-  * [spruce](https://github.com/geofffranks/spruce)
-  * [terraform-aws-cf-install](https://github.com/cloudfoundry-community/terraform-aws-cf-install)
-  * [terraform-aws-vpc](https://github.com/cloudfoundry-community/terraform-aws-vpc)
-  * [terraform-aws-cf-net](https://github.com/cloudfoundry-community/terraform-aws-cf-net)
-
 ## Further Reading
 
-Checkout the [docs](/docs) folder for further reading.
+More information about this project is available in the [docs](docs) folder.
+
+## License
+
+Released under the [MIT License](https://opensource.org/licenses/MIT).
