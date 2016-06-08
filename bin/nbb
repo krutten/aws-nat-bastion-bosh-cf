@@ -46,18 +46,23 @@ provider() {
 }
 
 install_dependencies() {
-  check_install
+  # for each binary we define a version, binary name, and version check.
+  brew update
+  check_install "Terraform v0.6.16" terraform "terraform -v"
+  check_install jq-1.5 jq "jq --version"
+  check_install 2.8.1 direnv "direnv version"
+  echo "Dependencies checked or installed, proceed to next step."
 }
 
 check_install() {
-  local _version=0.6.15 _install=false _bin="terraform" _check=`terraform -v | awk '/Terraform v/{print $2}'`
+  local _version=${1} _install=false _bin=${2} _check=${3}
 
   log "Checking for ${_bin} ... "
-  if ! command -v ${_bin} &>/dev/null
+  if [[ `which ${_bin}` -eq 1 ]]
   then
     install=true
   else
-    if [[ "${_check}" != "v${_version}" ]]
+    if [[ "${_check}" != "${_version}" ]]
     then
       _install=true
     fi
@@ -66,9 +71,7 @@ check_install() {
   if [[ ${_install} == true ]]
   then
     log "Installing ${_bin} ${_version} ..."
-    curl -sOL "https://releases.hashicorp.com/${_bin}/${_version}/${_bin}_${_version}_darwin_amd64.zip"
-    unzip -d "/usr/local/bin" "${_bin}_${_version}_darwin_amd64.zip"
-    rm -f "${_bin}_${_version}_darwin_amd64.zip"
+    brew install ${_bin}
     log "OK, ${_bin} ${_version} installed."
   else
     log "OK, ${_bin} is ${_version}"
