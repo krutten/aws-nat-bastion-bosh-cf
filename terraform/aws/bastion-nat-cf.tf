@@ -337,7 +337,7 @@ resource "aws_db_subnet_group" "uua-cc" {
 resource "aws_db_instance" "uua-cc" {
   allocated_storage    = 10
   engine               = "postgres"
-  instance_class       = "db.t1.micro"
+  instance_class       = "db.t2.micro"
   name                 = "uuacc" # no dashes allowed in name
   username             = "ccadmin"
   password             = "${var.cf.pass}"
