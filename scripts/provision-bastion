@@ -50,7 +50,7 @@ provision_os_packages() {
           libpq-dev libmysqlclient-dev libsqlite3-dev \
           g++ gcc make libc6-dev libreadline6-dev zlib1g-dev libssl-dev libyaml-dev \
           libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake \
-          libtool bison pkg-config libffi-dev cmake gpg patch screen
+          libtool bison pkg-config libffi-dev cmake gpg patch screen jq
         ;;
       (*CentOS*|*RedHat*|*Amazon*)
         sudo yum update -y
@@ -59,10 +59,13 @@ provision_os_packages() {
           zlib zlib-devel libevent libevent-devel readline readline-devel cmake ntp \
           htop wget tmux screen gcc g++ autoconf pcre pcre-devel vim-enhanced gcc mysql-devel \
           postgresql-devel postgresql-libs sqlite-devel libxslt-devel libxml2-devel \
-          yajl-ruby cmake gpg patch gcc-c++ bind-utils
+          yajl-ruby cmake gpg patch gcc-c++ bind-utils jq
         ;;
     esac
   } &>>"${HOME}/provision.log"
+}
+
+install_genesis() {
 }
 
 provision_rvm() {
@@ -201,7 +204,7 @@ install_spiff() {
 install_spruce() {
   echo "[provision] Installing Spruce to ${HOME}/bin/spruce"
   {
-    local _version="1.4.0"
+    local _version="1.9.0"
     local _url="https://github.com/geofffranks/spruce/releases/download/v${_version}/spruce-linux-amd64"
 
     if [[ ! -x "${HOME}/bin/spruce" ]]
@@ -211,6 +214,23 @@ install_spruce() {
         echo "Error downloading spruce: $?"
       fi
       chmod +x "${HOME}/bin/spruce"
+    fi
+  } &>>"${HOME}/provision.log"
+}
+
+install_safe() {
+  echo "[provision] Installing Spruce to ${HOME}/bin/safe"
+  {
+    local _version="0.1.7"
+    local _url="https://github.com/starkandwayne/safe/releases/download/v${_version}/safe-linux-amd64"
+
+    if [[ ! -x "${HOME}/bin/safe" ]]
+    then
+      if ! curl -L "${_url}" -o "${HOME}/bin/safe"
+      then
+        echo "Error downloading safe: $?"
+      fi
+      chmod +x "${HOME}/bin/safe"
     fi
   } &>>"${HOME}/provision.log"
 }
@@ -437,6 +457,8 @@ provision_base() {
   provision_ruby
   install_spiff
   install_spruce
+  install_safe
+  install_genesis
 }
 
 provision_bosh() {
@@ -538,7 +560,7 @@ cfRunSubdomain=""
 cfAppsSubdomain=""
 cfAdminPass=""
 cfPass=""
-cfBOSHUbuntuStemCell="3232.2"
+cfBOSHUbuntuStemCell="3363.24"
 
 backboneCountZ1=""
 apiCountZ1=""

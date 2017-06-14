@@ -48,7 +48,7 @@ provider() {
 install_dependencies() {
   # for each binary we define a version, binary name, and version check.
   brew update
-  check_install "Terraform v0.6.16" terraform "terraform -v"
+  check_install "Terraform v0.9.4" terraform "terraform -v"
   check_install jq-1.5 jq "jq --version"
   check_install 2.8.1 direnv "direnv version"
   echo "Dependencies checked or installed, proceed to next step."
@@ -79,7 +79,7 @@ check_install() {
 }
 
 check_install_terraform()  {
-  local _version=0.6.15 _install=false
+  local _version=0.9.4 _install=false
 
   log "Checking for terraform CLI ${_version} ..."
   if ! command -v terraform &>/dev/null

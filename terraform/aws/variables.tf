@@ -6,13 +6,25 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
+# variable "bosh" {
+#   type = "map"
+#   default =  {
+#     version = "256.2"
+#     sha1 = "ff2f4e16e02f66b31c595196052a809100cfd5a8"
+#     aws_cpi_version = "53"
+#     aws_cpi_sha1 = "3a5988bd2b6e951995fe030c75b07c5b922e2d59"
+#     type = "ruby"
+#     director_vm_size = "m3.medium"
+#     init_version = "0.0.92"
+#   }
+# }
 variable "bosh" {
   type = "map"
   default =  {
-    version = "256.2"
-    sha1 = "ff2f4e16e02f66b31c595196052a809100cfd5a8"
-    aws_cpi_version = "53"
-    aws_cpi_sha1 = "3a5988bd2b6e951995fe030c75b07c5b922e2d59"
+    version = "261.4"
+    sha1 = "4da9cedbcc8fbf11378ef439fb89de08300ad091"
+    aws_cpi_version = "65"
+    aws_cpi_sha1 = "26b3a5c43e6f82594a373309a495660d6db26254"
     type = "ruby"
     director_vm_size = "m3.medium"
     init_version = "0.0.92"
@@ -39,7 +51,7 @@ variable "centos_stemcell_version" {
 }
 
 variable "ubuntu_stemcell_version" {
-  default = "3232.2"
+  default = "3421"
 }
 
 # SHA1 can be found with curl stemcell-sha1s.starkandwayne.com/<stemcell>/<version>
@@ -49,7 +61,7 @@ variable "centos_stemcell_sha1" {
 }
 
 variable "ubuntu_stemcell_sha1" {
-  default = "c24ca1e494990aefa2eb236795447b76a9056648"
+  default = "3004f7bd7357e0853ef6056a7951ee6991f644c7"
 }
 
 variable "network" {

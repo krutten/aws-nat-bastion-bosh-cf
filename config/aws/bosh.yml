@@ -15,8 +15,10 @@ resource_pools:
   stemcell:
     #url: https://bosh.io/d/stemcells/bosh-aws-xen-hvm-centos-7-go_agent?v=${centos_stemcell_version}
     #sha1: ${centos_stemcell_sha1}
-    url: https://bosh.io/d/stemcells/bosh-aws-xen-hvm-ubuntu-trusty-go_agent?v=3012
-    sha1: 3380b55948abe4c437dee97f67d2d8df4eec3fc1
+    #url: https://bosh.io/d/stemcells/bosh-aws-xen-hvm-ubuntu-trusty-go_agent?v=3012
+    #sha1: 3380b55948abe4c437dee97f67d2d8df4eec3fc1
+    url: https://bosh.io/d/stemcells/bosh-aws-xen-hvm-ubuntu-trusty-go_agent?v=3421
+    sha1: 3004f7bd7357e0853ef6056a7951ee6991f644c7
 
   cloud_properties:
     instance_type: ${bosh-director_vm_size}
@@ -90,7 +92,7 @@ jobs:
 
     director:
       address: 127.0.0.1
-      name: herr-director
+      name: proto-director
       db: *db
       cpi_job: aws_cpi
       max_threads: 10

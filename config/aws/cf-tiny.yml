@@ -53,6 +53,7 @@ resource_pools:
   cloud_properties:
     availability_zone: ${cf-subnet2-az}
     instance_type: t2.medium
+    ephemeral_disk: {size: 10_000, type: gp2}
 - name: large_z1
   network: cf_private
   stemcell:
@@ -61,6 +62,7 @@ resource_pools:
   cloud_properties:
     availability_zone: ${cf-subnet2-az}
     instance_type: t2.large
+    ephemeral_disk: {size: 12_000, type: gp2}
 - name: lb_z1
   network: cf_public
   stemcell:
@@ -517,7 +519,7 @@ properties:
     staging_upload_password: ${cf-pass}
     staging_upload_user: staging_upload_user
   ccdb:
-    address: ${uuacc_db_address}
+    address: ${network}.04.101 #${uuacc_db_address}
     databases:
     - {name: ccdb, tag: cc}
     db_scheme: postgres

@@ -39,11 +39,11 @@ output "aws_subnet_bastion_az" {
 }
 
 output "cf_admin_pass" {
-  value = "${var.cf.admin_pass}"
+  value = "${var.cf["admin_pass"]}"
 }
 
 output "cf_pass" {
-  value = "${var.cf.pass}"
+  value = "${var.cf["pass"]}"
 }
 
 output "aws_key_path" {
@@ -78,11 +78,11 @@ output "aws_subnet_docker_id" {
 resource "template_file" "bosh_yml" {
   template = "${file("${path.module}/../../config/aws/bosh.yml")}"
   vars {
-    bosh-version = "${var.bosh.version}"
-    bosh-sha1 = "${var.bosh.sha1}"
-    bosh-aws_cpi_version = "${var.bosh.aws_cpi_version}"
-    bosh-aws_cpi_sha1 = "${var.bosh.aws_cpi_sha1}"
-    bosh-director_vm_size = "${var.bosh.director_vm_size}"
+    bosh-version = "${var.bosh["version"]}"
+    bosh-sha1 = "${var.bosh["sha1"]}"
+    bosh-aws_cpi_version = "${var.bosh["aws_cpi_version"]}"
+    bosh-aws_cpi_sha1 = "${var.bosh["aws_cpi_sha1"]}"
+    bosh-director_vm_size = "${var.bosh["director_vm_size"]}"
     bosh-subnet = "${module.vpc.aws_subnet_microbosh_id}"
     bosh-az = "${module.vpc.aws_subnet_bastion_availability_zone}"
     network = "${var.network}"
@@ -116,7 +116,7 @@ resource "aws_instance" "bastion" {
 
   connection {
     user = "centos"
-    key_file = "${var.aws_key_path}"
+    private_key = "${file(var.aws_key_path)}"
   }
 
   provisioner "file" {
@@ -126,8 +126,7 @@ resource "aws_instance" "bastion" {
 
   provisioner "remote-exec" {
     inline = [
-      "mkdir -p ${HOME}/{.ssh,bin,config,deployments}",
-      "chmod 0600 ${HOME}/.ssh/bosh.pem",
+      "mkdir -p $${HOME}/{.ssh,bin,config,deployments}"
     ]
   }
 }
@@ -145,47 +144,39 @@ output "centos_stemcell_sha1" {
 }
 
 output "bosh_sha1" {
-  value = "${var.bosh.sha1}"
+  value = "${var.bosh["sha1"]}"
 }
 
 output "bosh_aws_cpi_version" {
-  value = "${var.bosh.aws_cpi_version}"
+  value = "${var.bosh["aws_cpi_version"]}"
 }
 
 output "bosh_aws_cpi_sha1" {
-  value = "${var.bosh.aws_cpi_sha1}"
-}
-
-output "bosh_type" {
-  value = "${var.bosh.bosh_type}"
+  value = "${var.bosh["aws_cpi_sha1"]}"
 }
 
 output "bosh_director_vm_size" {
-  value = "${var.bosh.director_vm_size}"
-}
-
-output "bosh_init_version" {
-  value = "${var.bosh.init_version}"
+  value = "${var.bosh["director_vm_size"]}"
 }
 
 output "cf_domain" {
-  value = "${var.cf.domain}"
+  value = "${var.cf["domain"]}"
 }
 
 output "cf_run_subdomain" {
-  value = "${var.cf.run_subdomain}"
+  value = "${var.cf["run_subdomain"]}"
 }
 
 output "cf_apps_subdomain" {
-  value = "${var.cf.apps_subdomain}"
+  value = "${var.cf["apps_subdomain"]}"
 }
 
 output "cf_etcd_version" {
-  value = "${var.cf.etcd_version}"
+  value = "${var.cf["etcd_version"]}"
 }
 
 output "cf_haproxy_version" {
-  value = "${var.cf.haproxy_version}"
+  value = "${var.cf["haproxy_version"]}"
 }
 
 resource "aws_security_group_rule" "nat" {
@@ -218,15 +209,15 @@ output "bosh_subnet" {
 }
 
 output "bosh_type" {
-	value = "${var.bosh.type}"
+	value = "${var.bosh["type"]}"
 }
 
 output "bosh_init_version" {
-	value = "${var.bosh.init_version}"
+	value = "${var.bosh["init_version"]}"
 }
 
 output "bosh_version" {
-	value = "${var.bosh.version}"
+	value = "${var.bosh["version"]}"
 }
 
 output "network" {
@@ -274,7 +265,7 @@ output "cf_sg_id" {
 }
 
 output "cf_size" {
-	value = "${var.cf.size}"
+	value = "${var.cf["size"]}"
 }
 
 output "docker_subnet" {
@@ -286,11 +277,11 @@ output "install_docker_services" {
 }
 
 output "cf_release_version" {
-	value = "${var.cf.release_version}"
+	value = "${var.cf["release_version"]}"
 }
 
 output "cf_private_domains" {
-	value = "${var.cf.private_domains}"
+	value = "${var.cf["private_domains"]}"
 }
 
 output "debug" {
@@ -340,7 +331,7 @@ resource "aws_db_instance" "uua-cc" {
   instance_class       = "db.t2.micro"
   name                 = "uuacc" # no dashes allowed in name
   username             = "ccadmin"
-  password             = "${var.cf.pass}"
+  password             = "${var.cf["pass"]}"
   db_subnet_group_name = "uua-cc"
   depends_on           = ["aws_db_subnet_group.uua-cc"]
 }
